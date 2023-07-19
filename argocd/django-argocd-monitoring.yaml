@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: ansible-monitoring
+  name: django-monitoring
   namespace: argocd
 spec:
   destination:
