@@ -1,0 +1,55 @@
+<html>
+<head>
+<link rel="stylesheet" href="/static/ansibleapp/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<h1 align="center"> Django Ansible Robot Control </h1>
+<table align="center">
+ <tr>
+    <th></th>
+    <th><button id="forward" class="linus">^</button></th>
+    <th></th>
+    <th></th>
+    <th><button id="north" class="fiona">^</button></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><button id="left" class="linus"><</button></td>
+    <td><button id="on" class="linus">O</button></td>
+    <td><button id="right" class="linus">></button></td>
+    <td><button id="west" class="fiona"><</button></td>
+    <td><button id="fiona" class="fiona">O</button></td>
+    <td><button id="east" class="fiona">></button></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><button id="backward" class="linus">v</button></td>
+    <td></td>
+    <td></td>
+    <td><button id="south" class="fiona">v</button></td>
+    <td></td>
+  </tr>
+</table>
+<h2 align="center"> PWM Control </h2>
+<div class="pwm" align="center">
+  <button id="thirty">30%</button>
+  <button id="fifty">50%</button>
+  <button id="full">100%</button>
+</div>
+<h2 align="center"> Servo Control </h2>
+<h3 align="center"> Servo One  </h3>
+<div class="servo" align="center">
+  <button id="min">min</button>
+  <button id="mid">mid</button>
+  <button id="max">max</button>
+</div>
+<h3 align="center"> Servo Two </h3>
+<div class="servo" align="center">
+  <button id="min2">min</button>
+  <button id="mid2">mid</button>
+  <button id="max2">max</button>
+</div>
+<script src="/static/ansibleapp/logic.js"></script>
+</body>
+</html>
