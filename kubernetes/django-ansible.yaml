@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: roboport
+  labels:
+    name: django-ansible
+    release: prometheus
+  name: django-ansible
+  namespace: default
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: django-ansible
+  template:
+    metadata:
+      labels:
+        app: django-ansible
+    spec:
+      containers:
+      - name: django-ansible
+        image: linuxrobotgeek/django-ansible:latest
+        imagePullPolicy: Always
+        ports:
+        - name: roboport
+          containerPort: 8000
+          protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-ansible
+  namespace: default
+  labels:
+    app: django-ansible
+spec:
+  selector:
+    app: django-ansible
+  ports:
+    - name: django-ansible
+      protocol: TCP
+      port: 5000
+      targetPort: roboport
+  type: LoadBalancer
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: django-ansible
+  namespace: monitoring
+  labels:
+    app: django-ansible
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: django-ansible
+  endpoints:
+  - port: django-ansible
+    path: /metrics
+    interval: 15s
+  namespaceSelector:
+    matchNames:
+    - default
